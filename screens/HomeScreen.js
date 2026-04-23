@@ -34,17 +34,25 @@ export default function HomeScreen() {
 
     {/* HEADER */}
     <View style={styles.header}>
-      <Text style={styles.title}>Cotação de Moedas</Text>
-      <Text style={styles.subtitle}>Atualizado: {data}</Text>
+      <Text style={styles.title}>
+        Conversor de{"\n"}Moedas PRO
+      </Text>
     </View>
 
     {/* CARDS */}
     <View style={styles.content}>
 
+      <View style={styles.updateBox}>
+        <Text style={{ fontWeight: "bold" }}>Cotação Atual</Text>
+        <Text style={{ color: "#777", fontSize: 12 }}>
+          Última Atualização: {data}
+        </Text>
+      </View>
+
       <View style={styles.card}>
         <View>
           <Text style={styles.code}>USD / BRL</Text>
-          <Text style={styles.name}>Dólar Americano</Text>
+          <Text style={styles.name}>1 Dólar Americano</Text>
         </View>
         <Text style={styles.value}>R$ {usd}</Text>
       </View>
@@ -52,7 +60,7 @@ export default function HomeScreen() {
       <View style={styles.card}>
         <View>
           <Text style={styles.code}>EUR / BRL</Text>
-          <Text style={styles.name}>Euro</Text>
+          <Text style={styles.name}>1 Euro</Text>
         </View>
         <Text style={styles.value}>R$ {eur}</Text>
       </View>
@@ -74,14 +82,20 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    padding: 25,
-    marginTop: 20
+    backgroundColor: "#4CAF50",
+    paddingTop: 60,
+    paddingBottom: 100,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    alignItems: "center"
   },
 
   title: {
     color: "#fff",
     fontSize: 24,
-    fontWeight: "bold"
+    fontWeight: "600",
+    fontStyle: "italic",
+    textAlign: "center"
   },
 
   subtitle: {
@@ -92,20 +106,37 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     backgroundColor: "#f2f2f2",
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    padding: 20
+    marginTop: -40, 
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingTop: 60,
+    paddingHorizontal: 20
   },
 
   card: {
     backgroundColor: "#fff",
-    padding: 15,
+    padding: 18,
     borderRadius: 15,
-    marginBottom: 10,
+    marginBottom: 12,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    elevation: 3
+    elevation: 2
+  },
+
+  updateBox: {
+    backgroundColor: "#fff",
+    padding: 15,
+    borderRadius: 15,
+    alignItems: "center",
+
+    position: "absolute",
+    top: -30,
+    left: 20,
+    right: 20,
+
+    elevation: 5,
+    zIndex: 10
   },
 
   code: {
@@ -121,7 +152,7 @@ const styles = StyleSheet.create({
   value: {
     fontWeight: "bold",
     fontSize: 18,
-    color: "#2e7d32"
+    color: "#000000"
   },
 
   button: {
