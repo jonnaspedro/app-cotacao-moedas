@@ -41,7 +41,8 @@ export default function HomeScreen() {
         return {
           code: key,
           name: json[key].name,
-          value: parseFloat(json[key].bid).toFixed(2)
+          value: parseFloat(json[key].bid).toFixed(2),
+          pctChange: parseFloat(json[key].pctChange).toFixed(2)
         };
       });
 
@@ -57,32 +58,46 @@ export default function HomeScreen() {
     buscar();
   }, []);
 
-  const renderCard = (item) => (
-    <View key={item.code} style={styles.card}>
+  const renderCard = (item) => {
+    const isPositive = item.pctChange >= 0;
 
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+    return (
+      <View key={item.code} style={styles.card}>
 
-        {getFlag(item.code) ? (
-          <Image
-            source={{ uri: getFlag(item.code) }}
-            style={styles.flag}
-          />
-        ) : (
-          <Text style={{ fontSize: 18, marginRight: 8 }}></Text>
-        )}
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
 
-        <View>
-          <Text style={styles.code}>
-            {item.code} / BRL
+          {getFlag(item.code) ? (
+            <Image
+              source={{ uri: getFlag(item.code) }}
+              style={styles.flag}
+            />
+          ) : null}
+
+          <View>
+            <Text style={styles.code}>
+              {item.code} / BRL
+            </Text>
+            <Text style={styles.name}>{item.name}</Text>
+          </View>
+
+        </View>
+
+        <View style={{ alignItems: "flex-end" }}>
+          <Text style={styles.value}>R$ {item.value}</Text>
+
+          <Text
+            style={[
+              styles.change,
+              { color: isPositive ? "#2ecc71" : "#e74c3c" }
+            ]}
+          >
+            {isPositive ? "▲" : "▼"} {item.pctChange}%
           </Text>
-          <Text style={styles.name}>{item.name}</Text>
         </View>
 
       </View>
-
-      <Text style={styles.value}>R$ {item.value}</Text>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -104,7 +119,6 @@ export default function HomeScreen() {
           </Text>
         </View>
 
-        {/* LISTA DINÂMICA */}
         <ScrollView showsVerticalScrollIndicator={false}>
           {coins.map(renderCard)}
         </ScrollView>
@@ -196,6 +210,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     color: "#000"
+  },
+
+  change: {
+    fontSize: 12,
+    fontWeight: "bold",
+    marginTop: 4
   },
 
   button: {
