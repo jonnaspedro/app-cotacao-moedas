@@ -19,3 +19,17 @@ Baixar dependências
 - npm install --save react-native-screens react-native-safe-area-context
 - npm install axios
 - npm install firebase
+
+Build com EAS - EXPO
+
+- npm install eas-cli
+- eas login
+  - E-mail
+  - Senha
+- eas build:configure
+  - yes
+  - yes
+  - enter
+  - ALL
+- eas build -p android --profile preview
+  - Entra no Link e espera o APK
