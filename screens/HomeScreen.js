@@ -130,7 +130,6 @@ export default function HomeScreen() {
       </View>
     </View>
   );
-}
 
 const styles = StyleSheet.create({
   container: {
